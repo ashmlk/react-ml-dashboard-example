@@ -1,8 +1,35 @@
-import React, { Component } from 'react';
-import { Formik, useFormik, Form, FieldArray, Field, withFormik } from 'formik';
+import React, { Component, useState } from 'react';
+import { render } from 'react-dom';
+import { Formik, useFormik, Form, FieldArray, Field, withFormik, FastField } from 'formik';
 import Editor from "react-simple-code-editor";
 import GraphQLQueryCode from './GraphQLQueryCode';
+import GraphQLQuerySubmissionStatus from './GraphQLFormSubissionStatus';
 import { object, string } from 'yup';
+
+
+function getSubmissionResponse() {
+
+  /* return random response from some CoolAPI() */
+  const responses = [
+    {
+      status: "failed",
+      message: "Name for character with ID 2423 was not found"
+    },
+    {
+      status: "success",
+      message: "Query was submitted successfully"
+    },
+    {
+      status: "failed",
+      message: "Name for character with ID 2423 was not found"
+    },
+  ]
+
+  return (
+    responses[Math.floor(Math.random() * responses.length)]
+  )
+
+}
 
 
 const GraphQLQueryFormik = props => {
@@ -18,9 +45,10 @@ const GraphQLQueryFormik = props => {
     handleReset,
   } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+<form onSubmit={handleSubmit}>
       <div className="d-flex align-items-center mt-3 form-group d-flex">
-        <label className="h6 mr-1" htmlFor="model" style={{ display: 'block' }}>
+        <label className="h6 mr-1 ds-text-sm" htmlFor="model" style={{ display: 'block' }}>
           Model:
         </label>
         <select
@@ -29,7 +57,7 @@ const GraphQLQueryFormik = props => {
           onChange={handleChange}
           onBlur={handleBlur}
           style={{ display: 'inline-block', width:'auto' }}
-          className="form-control form-select-sm"
+          className="form-control form-control-sm"
         >
           
           <option value="" label="Select a model" />
@@ -41,7 +69,7 @@ const GraphQLQueryFormik = props => {
         </select>
       </div>
       <div>
-        <span className="ds-font-sm">
+        <span className="ds-text-sm">
           {errors.model &&
           touched.model &&
           <div className="input-feedback">
@@ -50,7 +78,7 @@ const GraphQLQueryFormik = props => {
         </span>
       </div>
       <div className="d-flex align-items-center form-group d-flex">
-        <label className="h6 mr-1" htmlFor=" type" style={{ display: 'block' }}>
+        <label className="h6 mr-1 ds-text-sm" htmlFor=" type" style={{ display: 'block' }}>
           Type:
         </label>
         <select
@@ -59,7 +87,7 @@ const GraphQLQueryFormik = props => {
           onChange={handleChange}
           onBlur={handleBlur}
           style={{ display: 'block', width:'auto' }}
-          className="form-control form-select"
+          className="form-control form-control-sm"
         >
           <option value="" label="Select a type" />
           <option value="query" label="query" />
@@ -68,7 +96,7 @@ const GraphQLQueryFormik = props => {
         
       </div>
       <div>
-        <span className="ds-font-sm">
+        <span className="ds-text-sm">
         {errors.type &&
           touched.type &&
           <div className="input-feedback">
@@ -97,6 +125,9 @@ const GraphQLQueryFormik = props => {
           </button>
       </div>
     </form>
+    <div id="query-response-container" className="my-2"></div>
+    </div>
+    
   );
 };
 
@@ -109,11 +140,18 @@ const GraphQLQueryForm = withFormik({
   }),
   handleSubmit: (values, { setSubmitting }) => {
     
+    let response = getSubmissionResponse();
+    let variant = null;
+    response.status == "success" ? variant = "success" : variant = "danger";
+
     setTimeout(() => {
       values.graph_code = document.getElementById('graph_code_textarea_id').value;
-      alert(JSON.stringify(values, null, 2));
+      render (
+        <GraphQLQuerySubmissionStatus variant={variant} message={response.message} model={values.model} />,
+        document.getElementById('query-response-container')
+      )
       setSubmitting(false);
-    }, 1000);
+    }, 500);
   },
   displayName: 'BasicForm', // helps with React DevTools
 })(GraphQLQueryFormik);

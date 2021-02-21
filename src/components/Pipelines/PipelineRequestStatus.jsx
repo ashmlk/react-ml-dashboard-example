@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { render } from 'react-dom';
 
-function AlertDismissibleExample(variant, message) {
+function PipelineAlert(variant, message) {
 
     return (
       <Alert variant={variant}>
@@ -19,7 +19,7 @@ class PipelineRequestStatus extends Component {
 
     render () {
         return (
-            AlertDismissibleExample(this.props.variant, this.props.message)
+            PipelineAlert(this.props.variant, this.props.message)
         );
     }
 }
