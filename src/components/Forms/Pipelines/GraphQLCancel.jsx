@@ -3,6 +3,10 @@ import { render } from 'react-dom';
 import { withFormik } from 'formik';
 import PipelineCancelOrError from '../../Pipelines/PipelineCancelOrError';
 
+/* 
+* Form for canceling task
+* Use component PipelineCancelOrError to display alert box
+*/
 
 const StatusForm = props => {
     const {
@@ -72,7 +76,7 @@ validate: values => {
     if (!values.status_id) {
     errors.status_id = 'Required';
     } else if (
-    !/^[a-zA-Z0-9-_]+$/i.test(
+    !/^[a-zA-Z0-9-_]+$/i.test( // id is assumed to only be alphanumeric with dash and underscore
         values.status_id
     )
     ) {
@@ -84,14 +88,13 @@ validate: values => {
 handleSubmit: (values, { setSubmitting }) => {
     setTimeout(() => {
     /* here we handle the submission of the id */
-    /* a function will return a piple if the result is found - however, for demo we only accept a list of ids */     
+    /* a function will return a pipeline if the result is found - however, for demo we only accept a list of ids */     
     render (
         <PipelineCancelOrError id={values.status_id} />,
         document.getElementById('graph-status-result')
     )
-    
     setSubmitting(false);
-    }, 1000);
+    }, 500);
 },
 
 })(StatusForm);

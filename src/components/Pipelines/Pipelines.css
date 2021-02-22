@@ -1,28 +1,27 @@
 .pipelines-list-header {
-    font-size: 1.7rem;
-    font-weight: 550;
-    margin: 10px 0px 10px 0px;
+  font-size: 1.7rem;
+  font-weight: 550;
+  margin: 10px 0px 10px 0px;
 }
 
 .pipe-line-actions {
-    top: 10px;
+  top: 10px;
 }
 .pipe-line-actions a {
-    color: var(--dark);
-    margin: 7px;
-    font-weight: 600;
-    font-size: 0.85rem;
+  color: var(--dark);
+  margin: 7px;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .pipeline-action-item .nav-link-icon {
-    margin: 0px 8px 2px 5px;
+  margin: 0px 8px 2px 5px;
 }
 
 .pipeline-action-item a {
-    margin: 0px !important;
+  margin: 0px !important;
 }
 
 .pipeline-action-item .pipeline-link-selected {
-    background-color: var(--muted);
-    
+  background-color: var(--muted);
 }
