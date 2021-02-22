@@ -8,7 +8,7 @@ The CSS framework used in the this project is Bootstrap.
 
 ### Submit GraphQL Query via web text editor
 
-You can write a GraphQL query on the text editor - for demoo purposes the componet will randomly return a status to display success or error messages.
+You can write a GraphQL query on the text editor - for demo purposes the component will randomly return a status to display success or error messages.
 
 ### Cancel running pipelines via their ID's
 
