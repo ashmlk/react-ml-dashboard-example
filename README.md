@@ -4,6 +4,20 @@ This project is a mockup of a dashboard that allows users to submit GraphQL quer
 
 The CSS framework used in the this project is Bootstrap.
 
+## Available Actions
+
+### Submit GraphQL Query via web text editor
+
+You can write a GraphQL query on the text editor - for demoo purposes the componet will randomly return a status to display success or error messages.
+
+### Cancel running pipelines via their ID's
+
+You can enter a pipeline ID, between 1 - 3 it will return a successful response otherwise an error message will be displayed.
+
+### Get status of pipelines
+
+You can enter a pipeline ID to check the status of the pipelines. Between 1 - 3 it will return success otherwise an error will be displayed.
+
 ## Available Scripts
 
 In the project directory, you can run:
